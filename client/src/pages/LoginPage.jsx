@@ -15,7 +15,7 @@ const LoginPage = ({ role }) => {
     e.preventDefault();
     try {
       const response = await api.post('/api/login', { email, password });
-      if (response.data.user.role !== role.toLowerCase()) {
+      if (response.data.user.role.toLowerCase() !== role.toLowerCase()) {
         setError(`This login is for ${role}s only.`);
         return;
       }

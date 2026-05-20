@@ -47,7 +47,7 @@ const LandingPage = () => {
       ) : (
         <div style={{ animation: 'fadeIn 0.5s ease' }}>
           <p style={{ fontSize: '1.2rem', color: '#718096' }}>Welcome back, <b>{user.name}</b>!</p>
-          <button onClick={() => navigate(`/${user.role}`)} className="main-login-btn interactive-tap" style={{ marginTop: '1rem' }}>
+          <button onClick={() => navigate(`/${user.role.toLowerCase()}`)} className="main-login-btn interactive-tap" style={{ marginTop: '1rem' }}>
             Go to Portal
           </button>
         </div>
