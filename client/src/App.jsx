@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import NoticeBoard from './components/NoticeBoard';
 import './App.css';
+import logo from './assets/logo.jpg';
 
 import AboutPage from './pages/AboutPage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -32,7 +33,9 @@ const LandingPage = () => {
     <div className="landing-hero">
       <Link to="/about" className="top-left-about"><HelpCircle size={18} style={{ verticalAlign: 'middle', marginRight: '5px' }} /> About</Link>
       
-      <div className="logo-animation">🏫</div>
+      <div className="logo-animation">
+        <img src={logo} alt="School Logo" style={{ width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #667eea', boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4)' }} />
+      </div>
       <div className="school-name-large">Janta +2 High School</div>
       <h1 className="welcome-title main-title-animated">Welcome to Digital-Janta</h1>
       
