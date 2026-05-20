@@ -8,7 +8,7 @@ const RegisterPage = () => {
     name: '',
     email: '',
     password: '',
-    role: 'student',
+    role: 'student', // Fixed as student
     className: '10',
     section: 'A'
   });
@@ -25,67 +25,62 @@ const RegisterPage = () => {
     try {
       await api.post('/api/register', formData);
       setSuccess('Account created! Redirecting to login...');
-      setTimeout(() => navigate('/'), 2000);
+      setTimeout(() => navigate('/login/student'), 2000); // Redirect to student login
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed');
     }
   };
 
   return (
-    <div className="login-form-container">
-      <div className="login-card" style={{ cursor: 'default', transform: 'none', maxWidth: '400px' }}>
-        <Link to="/" className="secondary-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', marginBottom: '1rem', fontSize: '0.8rem' }}>
-          <ArrowLeft size={14} /> Back
-        </Link>
-        <h2>Create Account</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="special-page-container">
+      <div className="special-page-card" style={{ maxWidth: '500px' }}>
+        <button onClick={() => navigate(-1)} className="back-circle-btn"><ArrowLeft /></button>
+        <h1 className="colorful-title">Student Registration</h1>
+        <p style={{ color: '#a0aec0', marginBottom: '2rem' }}>Join the Digital-Janta community</p>
+        
+        <form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
           <div className="form-group">
-            <input name="name" placeholder="Full Name" onChange={handleChange} required />
+            <label style={{ fontSize: '0.8rem', fontWeight: '700', marginLeft: '5px' }}>Full Name</label>
+            <input name="name" placeholder="e.g. Rahul Kumar" onChange={handleChange} required className="modern-input" />
           </div>
           <div className="form-group">
-            <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
+            <label style={{ fontSize: '0.8rem', fontWeight: '700', marginLeft: '5px' }}>Email Address</label>
+            <input name="email" type="email" placeholder="student@email.com" onChange={handleChange} required className="modern-input" />
           </div>
           <div className="form-group">
-            <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '5px' }}>Role:</label>
-            <select name="role" value={formData.role} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #e2e8f0' }}>
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-              <option value="principal">Principal</option>
-            </select>
+            <label style={{ fontSize: '0.8rem', fontWeight: '700', marginLeft: '5px' }}>Create Password</label>
+            <input name="password" type="password" placeholder="••••••••" onChange={handleChange} required className="modern-input" />
           </div>
 
-          {(formData.role === 'student' || formData.role === 'teacher') && (
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <div className="form-group" style={{ flex: 1 }}>
-                <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '5px' }}>Class:</label>
-                <select name="className" value={formData.className} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #e2e8f0' }}>
-                  <option value="9">9th</option>
-                  <option value="10">10th</option>
-                  <option value="11">11th</option>
-                  <option value="12">12th</option>
-                </select>
-              </div>
-              <div className="form-group" style={{ flex: 1 }}>
-                <label style={{ fontSize: '0.8rem', display: 'block', marginBottom: '5px' }}>Section:</label>
-                <select name="section" value={formData.section} onChange={handleChange} style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #e2e8f0' }}>
-                  <option value="A">Section A</option>
-                  <option value="B">Section B</option>
-                </select>
-              </div>
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <div className="form-group" style={{ flex: 1 }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: '700', marginLeft: '5px' }}>Class</label>
+              <select name="className" value={formData.className} onChange={handleChange} className="modern-input">
+                <option value="9">9th</option>
+                <option value="10">10th</option>
+                <option value="11">11th</option>
+                <option value="12">12th</option>
+              </select>
             </div>
-          )}
+            <div className="form-group" style={{ flex: 1 }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: '700', marginLeft: '5px' }}>Section</label>
+              <select name="section" value={formData.section} onChange={handleChange} className="modern-input">
+                <option value="A">Section A</option>
+                <option value="B">Section B</option>
+              </select>
+            </div>
+          </div>
 
-          {error && <p className="error-msg">{error}</p>}
-          {success && <p style={{ color: '#48bb78', fontSize: '0.85rem' }}>{success}</p>}
-          <button type="submit" className="login-btn">
-            <UserPlus size={18} style={{ marginRight: '8px' }} /> Register
+          {error && <p className="error-msg" style={{ textAlign: 'center' }}>{error}</p>}
+          {success && <p style={{ color: '#48bb78', fontSize: '0.9rem', textAlign: 'center', fontWeight: '600' }}>{success}</p>}
+          
+          <button type="submit" className="main-login-btn" style={{ width: '100%', fontSize: '1.2rem', marginTop: '1rem' }}>
+            <UserPlus size={20} style={{ marginRight: '8px' }} /> Register Now
           </button>
         </form>
-        <p style={{ marginTop: '1rem', fontSize: '0.85rem' }}>
-          Already have an account? <Link to="/" style={{ color: 'var(--accent-color)' }}>Login</Link>
+        
+        <p style={{ marginTop: '2rem', fontSize: '0.9rem', color: '#a0aec0' }}>
+          Already have an account? <Link to="/" style={{ color: '#667eea', fontWeight: '700', textDecoration: 'none' }}>Login</Link>
         </p>
       </div>
     </div>
