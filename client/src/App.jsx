@@ -10,6 +10,7 @@ import RegisterPage from './pages/RegisterPage';
 import NoticeBoard from './components/NoticeBoard';
 import './App.css';
 import logo from './assets/logo.jpg';
+import api from './api';
 
 import AboutPage from './pages/AboutPage';
 import PrivacyPage from './pages/PrivacyPage';
