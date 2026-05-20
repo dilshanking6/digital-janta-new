@@ -361,6 +361,24 @@ app.get('/api/notifications/unread/:userId', async (req, res) => {
   }
 });
 
+app.get('/api/messages/all', async (req, res) => {
+  try {
+    const rows = await getSheetData('Messages') || [];
+    const messages = rows.slice(1)
+      .filter(row => row && row[2] === 'all')
+      .map(row => ({
+        createdAt: row[0],
+        content: row[3],
+        type: row[4],
+        id: row[7]
+      }))
+      .reverse();
+    res.json(messages);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Catch-all route to serve React's index.html
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));

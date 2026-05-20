@@ -87,7 +87,7 @@ const ProtectedRoute = ({ children, allowedRole }) => {
 
   if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading Portal...</div>;
   
-  if (!user) {
+  if (!user || !user.role) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 

@@ -9,15 +9,20 @@ const NoticeBoard = () => {
     const fetchNotices = async () => {
       try {
         const res = await api.get('/api/messages/all');
-        setNotices(res.data);
+        if (Array.isArray(res.data)) {
+          setNotices(res.data);
+        } else {
+          setNotices([]);
+        }
       } catch (err) {
         console.error('Failed to fetch notices');
+        setNotices([]);
       }
     };
     fetchNotices();
   }, []);
 
-  if (notices.length === 0) return null;
+  if (!Array.isArray(notices) || notices.length === 0) return null;
 
   return (
     <div className="important-notices" style={{ 
