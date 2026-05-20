@@ -90,7 +90,7 @@ const ProtectedRoute = ({ children, allowedRole }) => {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
 
-  if (user.role !== allowedRole) {
+  if (user.role.toLowerCase() !== allowedRole.toLowerCase()) {
     return <Navigate to="/" replace />;
   }
 
